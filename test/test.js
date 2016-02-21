@@ -1,12 +1,6 @@
 var assert = require('assert');
 var VM = require('../brainfuck').VM;
 
-describe('testing stuff', function () {
-    it('just checks primitives', function () {
-       assert.equal(1,1);
-    });
-});
-
 describe('brainfuck vm', function () {
     describe('constructor', function () {
         var vm;

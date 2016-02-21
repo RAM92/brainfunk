@@ -80,11 +80,3 @@ function VM (program, input) {
 }
 
 module.exports.VM = VM;
-// var str = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.';
-// var vm = new VM(str);
-// var stdout = '';
-// vm.out = function (s) {
-//   stdout+=s;
-// }
-// vm.run();
-// console.log(stdout + stdout + stdout);
