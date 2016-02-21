@@ -1,0 +1,14 @@
+{
+  "name": "brainfuck",
+  "version": "1.0.0",
+  "description": "",
+  "main": "brainfuck.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "^2.4.5"
+  }
+}

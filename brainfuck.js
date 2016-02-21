@@ -29,7 +29,7 @@ VM.prototype.tick = function () {
       this.ptr--;
       break;
     case '.':
-      this.out(String.fromCharCode(cell));
+      this.out(cell);
       break;
     case '[':
       if (cell) {
@@ -56,7 +56,12 @@ VM.prototype.pop = function () {
   this.PC = this.stack.pop();
 };
 VM.prototype.out = function (x) {
-  console.log(x);
+  console.log(String.fromCharCode(x));
+};
+VM.prototype.run = function () {
+  while (this.PC < this.program.length) {
+    this.tick();
+  }  
 };
 function VM (program) {
   this.program = program || '';
@@ -70,14 +75,12 @@ function VM (program) {
   this.buffer = a;
 }
 
-
-var str = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.';
-var vm = new VM(str);
-var stdout = '';
-vm.out = function (s) {
-  stdout+=s;
-}
-while (vm.PC < vm.program.length) {
-  vm.tick();
-}
-console.log(stdout + stdout + stdout);
+module.exports.VM = VM;
+// var str = '++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.';
+// var vm = new VM(str);
+// var stdout = '';
+// vm.out = function (s) {
+//   stdout+=s;
+// }
+// vm.run();
+// console.log(stdout + stdout + stdout);
