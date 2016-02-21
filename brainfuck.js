@@ -31,6 +31,9 @@ VM.prototype.tick = function () {
     case '.':
       this.out(cell);
       break;
+    case ',':
+      this.buffer[this.ptr]=this.input.shift();
+      break;
     case '[':
       if (cell) {
         this.push();
@@ -63,8 +66,9 @@ VM.prototype.run = function () {
     this.tick();
   }  
 };
-function VM (program) {
+function VM (program, input) {
   this.program = program || '';
+  this.input=(input||'').split('');
   this.ptr=0;
   this.PC=0;
   this.stack = [];

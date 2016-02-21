@@ -11,7 +11,7 @@ describe('brainfuck vm', function () {
     describe('constructor', function () {
         var vm;
         beforeEach(function () {
-            vm = new VM('>>>>');
+            vm = new VM('>>>>', '1234');
         });
         it('sets the PC and ptr registers to 0', function () {
             assert.equal(vm.PC, 0);
@@ -26,6 +26,9 @@ describe('brainfuck vm', function () {
         });
         it('loads the program', function () {
             assert.equal(vm.program, '>>>>');
+        });
+        it('reads the input and converts to an array', function () {
+            assert.deepEqual(vm.input, [1,2,3,4]);
         });
     });
     describe('bracket matcher', function () {
@@ -48,7 +51,7 @@ describe('brainfuck vm', function () {
     describe('opcode', function () {
         var vm;
         beforeEach(function () {
-            vm = new VM('+-><.');
+            vm = new VM('+-><.,');
         });
         it('+ increments the current cell', function () {
             vm.ptr=100;
@@ -118,6 +121,22 @@ describe('brainfuck vm', function () {
             vm.PC=4;
             vm.tick();
             assert.equal(str, 'abc');
+        });
+        it(', reads a character into the current cell', function () {
+            vm.input='1234'.split('');
+            vm.PC=5;
+            vm.tick();
+            assert.equal(vm.buffer[0], '1');
+            assert.deepEqual(vm.input, [2,3,4]);
+            vm.PC=5;
+            vm.tick();
+            assert.deepEqual(vm.input, [3,4]);
+            vm.PC=5;
+            vm.tick();
+            assert.deepEqual(vm.input, [4]);
+            vm.PC=5;
+            vm.tick();
+            assert.deepEqual(vm.input, []);
         });
         it('[ pushes the current PC onto the stack if cell!=0', function () {
             vm.program='[[....]..]';
