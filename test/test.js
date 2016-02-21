@@ -1,5 +1,5 @@
 var assert = require('assert');
-var VM = require('../brainfuck').VM;
+var VM = require('../brainfunk').VM;
 
 describe('brainfuck vm', function () {
     describe('constructor', function () {
