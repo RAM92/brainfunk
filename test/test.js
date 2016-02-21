@@ -13,10 +13,9 @@ describe('brainfuck vm', function () {
         });
         it('initializes each buffer element to 0', function () {
             assert.equal(vm.buffer.length, 30000);
-            var x = vm.buffer.reduce(function (prev, current) {
-                return prev + current;
-            } ,0);
-            assert.equal(x, 0);
+            vm.buffer.forEach(function (cell) {
+                assert.equal(cell, 0);
+            });
         });
         it('loads the program', function () {
             assert.equal(vm.program, '>>>>');
