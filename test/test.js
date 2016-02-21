@@ -119,5 +119,44 @@ describe('brainfuck vm', function () {
             vm.tick();
             assert.equal(str, 'abc');
         });
+        it('[ pushes the current PC onto the stack if cell!=0', function () {
+            vm.program='[[....]..]';
+            assert.equal(vm.stack.length, 0);
+            vm.tick();
+            assert.equal(vm.stack.length, 0);
+            vm.PC=0;
+            vm.buffer[0]=1;
+            vm.tick();
+            assert.deepEqual(vm.stack, [0]);
+            vm.tick();
+            assert.deepEqual(vm.stack, [0, 1]);
+        });
+        it('[ jumps to matching ]+1 if cell==0', function () {
+            vm.program='[..[...]...]..';
+            vm.tick();
+            assert.equal(vm.PC, 12);
+            vm.PC=3;
+            vm.tick();
+            assert.equal(vm.PC, 8);
+        });
+        it('] pops the stack into PC', function () {
+            vm.program=']';
+            vm.stack.push(3);
+            vm.stack.push(6);
+            vm.stack.push(9);
+            assert.deepEqual(vm.stack, [3, 6, 9]);
+            vm.tick();
+            assert.equal(vm.PC, 9);
+            assert.deepEqual(vm.stack, [3, 6]);
+            vm.PC=0;
+            vm.tick();
+            assert.equal(vm.PC, 6);
+            assert.deepEqual(vm.stack, [3]);
+            vm.PC=0;
+            vm.tick();
+            assert.equal(vm.PC, 3);
+            assert.deepEqual(vm.stack, []);
+        });
+
     });
 });
