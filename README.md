@@ -1,12 +1,12 @@
-#Brainfunk
+# Brainfunk
 
 ...You probably won't need this!
 
-##Installation
+## Installation
 ```
 npm install
 ```
-##Test
+## Test
 ```
 npm test
 ```
